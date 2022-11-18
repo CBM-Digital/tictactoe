@@ -5,14 +5,19 @@ import { ReactNode, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  const [board, setBoard] = useState(new Array(9).fill(null));
+  const [board, setBoard] = useState(new Array(9).fill(0));
+  const [player,setplayer] = useState(-1)
 
   console.log(board)
   function move(index:number){
     const newboard = [...board]
-    newboard[index] = "X"
+      newboard[index] = player
+
     console.log(index)
     setBoard(newboard)
+
+    const nextplayer = player * -1
+    setplayer(nextplayer)
 
   }
 
@@ -26,7 +31,8 @@ export default function Home() {
       <h1>TicTacToe</h1>
     <div className={styles.boardbox}>{board.map((item,index) => (
     <Grid key={index} onClick={() => move(index)} >
-      {item}
+      {item === 1 ? "X":null}
+      {item === -1 ? "O":null}
     </Grid>))
     }</div>
     
