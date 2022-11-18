@@ -46,6 +46,7 @@ export default function Home() {
     
     {Xwin&&<h2>Fuck Yeah X!</h2>}
     {Owin&&<h2>Fuck Yeah O!</h2>}
+    {Xwin||Owin&&<button onClick={()=>setBoard(new Array(9).fill(0))}>Play Again?</button>}
       </div>
 
       )
