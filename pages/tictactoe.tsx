@@ -1,10 +1,21 @@
 import exp from 'constants'
 import Head from 'next/head'
 import Image from 'next/image'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const [board, setBoard] = useState(new Array(9).fill(null));
+
+  console.log(board)
+  function move(index:number){
+    const newboard = [...board]
+    newboard[index] = "X"
+    console.log(index)
+    setBoard(newboard)
+
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,16 +24,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>TicTacToe</h1>
-    <div className={styles.boardbox}>{new Array(9).fill(null).map(() => <Grid></Grid>)}</div>
+    <div className={styles.boardbox}>{board.map((item,index) => (
+    <Grid key={index} onClick={() => move(index)} >
+      {item}
+    </Grid>))
+    }</div>
     
 
       </div>
 
       )
+
     }
 
-function Grid(props:{children?:ReactNode}){
  
-  return <div className={styles.board}>{props.children}</div>
+function Grid(props:{children?:ReactNode,onClick?:()=>void}){
+ 
+  return <div className={styles.board} onClick={props.onClick}>{props.children}</div>
+
 
 }
