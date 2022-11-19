@@ -68,7 +68,7 @@ function checkwinner(board:number[],player:number):boolean{
     const row3 = [6,7,8];
 
     const col1 = [0,3,6];
-    const col2 = [1,4,5];
+    const col2 = [1,4,7];
     const col3 = [2,5,8];
 
     const diag1 = [0,4,8];
@@ -84,4 +84,6 @@ function checkwinner(board:number[],player:number):boolean{
     const winner = combos.some(iswin)
     console.log(winner)
     return winner
+
+    
 }
