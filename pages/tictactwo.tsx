@@ -28,6 +28,9 @@ export default function Home() {
   function play(index:number){
     if (player == -1){
     move(index);}
+    else if(empty&&Math.random()>0.3){
+      move(Math.floor(Math.random()*9))
+    }
     else{
     move(minimax(board,9,1,true));}
 
@@ -99,12 +102,12 @@ function checkwinner(board:number[],player:number):boolean{
 }
 
 //self defined max & min
-function max(a,b){
+function max(a:number,b:number){
     if(a>b){return a}
     else{return b}
   }
   
-  function min(a,b){
+  function min(a:number,b:number){
     if(a<b){return a}
     else{return b}
   }
