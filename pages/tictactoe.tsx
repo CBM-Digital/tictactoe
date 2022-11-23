@@ -1,8 +1,5 @@
-import exp from 'constants'
-import { SourceMap } from 'module'
-import { checkCustomRoutes } from 'next/dist/lib/load-custom-routes'
+
 import Head from 'next/head'
-import Image from 'next/image'
 import { ReactNode, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
