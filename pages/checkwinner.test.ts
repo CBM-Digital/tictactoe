@@ -1,4 +1,3 @@
-import exp from "constants";
 import checkwinner from "./checkwinner";
 
 describe("checkwinner test",() => {
