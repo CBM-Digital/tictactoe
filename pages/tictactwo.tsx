@@ -1,16 +1,18 @@
 import Head from 'next/head'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useState, useEffect, useCallback, useMemo } from 'react'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const [board, setBoard] = useState(new Array(9).fill(0));
   const [player,setplayer] = useState(1)
 
-  const Xwin = checkwinner(board,1)
-  const Owin = checkwinner(board,-1)
-  const draw = (board.includes(0)==false&&Owin==false&&Xwin==false) 
+  const Xwin = useMemo(() => checkwinner(board, 1), [board]);
+  const Owin = useMemo(() => checkwinner(board, -1), [board]);
+  const draw = useMemo(() => (board.includes(0)==false&&Owin==false&&Xwin==false), [board]);
 
-  function move(index:number){
+  // function move(index:number){
+
+  const move = useCallback((index: number) => {
     if(Xwin||Owin){return}
     const newboard = [...board]
       if(newboard[index] != 0){return}
@@ -21,22 +23,29 @@ export default function Home() {
 
     const nextplayer = player * -1
     setplayer(nextplayer)
-    
+  }, [board, player, Xwin, Owin]);
 
-  }
+  const empty = useMemo(() => board.some((value: number) => value !== 0), [board]);
 
-  function play(index:number){
-    if (player == -1){
-    move(index);}
-    else if(empty&&Math.random()>0.3){
-      move(Math.floor(Math.random()*9))
+  const play = useCallback((index: number) => {
+    if (player == -1) {
+      move(index);
     }
-    else{
-    move(minimax(board,9,1,true));}
+  }, [board, player, move, empty]);
 
-}
-let empty:boolean = true
-for(let i = 0;i<=8;i++){if(board[i]!=0){empty = false}}
+
+  useEffect(() => {
+    let timeout: any;
+    if (player === 1) {
+      timeout = setTimeout(() => {
+        move(minimax(board, 4, 1, true));
+      }, 150);
+    }
+
+    return () => {
+      timeout && clearTimeout(timeout);
+    }
+  }, [player, move, board]);
 
   return (
     <div className={styles.container}>
