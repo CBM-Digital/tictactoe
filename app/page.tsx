@@ -63,7 +63,7 @@ export default function Home() {
     }</div>
 
 
-    {empty&&<p className={styles.p}>Wait a sec, its thinking!</p>}
+    {empty&&<p className={styles.p}>Wait a sec, it&apos;s thinking!</p>}
 
     {Xwin&&<h2>Fuck Yeah X!</h2>}
     {Owin&&<h2>Fuck Yeah O!</h2>}
