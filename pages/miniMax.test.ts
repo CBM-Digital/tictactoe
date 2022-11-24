@@ -24,11 +24,17 @@ describe("Test O winning", () => {
 });*/
 
 const finalcases:[number[],number,number,boolean,number][] = [
+  //easy win  
     [[-1,1,1,-1,1,-1,0,-1,0],9,1,true,6],
     [[-1,1,1,-1,1,-1,0,-1,0],9,-1,true,6],
+  //top right win for either
     [[-1,0,0,0,1,0,1,0,-1],9,1,true,2],
     [[-1,0,0,0,1,0,1,0,-1],9,-1,true,2],
-    [[-1,0,-1,0,-1,1,0,1],9,1,true,7],
+  //final move ready
+    [[-1,0,-1,0,-1,1,1,0,1],9,1,true,7],
+    [[-1,0,0,0,1,-1,1,-1,1],9,1,true,2],
+    [[0,0,-1,0,1,-1,1,-1,1],9,1,true,2],
+    [[0,0,-1,0,1,-1,1,-1,1],1,1,false,2],
     ];
 
 describe("choosing the final move", () => {
