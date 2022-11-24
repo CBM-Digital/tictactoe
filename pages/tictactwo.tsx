@@ -8,7 +8,7 @@ export default function Home() {
 
   const Xwin = useMemo(() => checkwinner(board, 1), [board]);
   const Owin = useMemo(() => checkwinner(board, -1), [board]);
-  const draw = useMemo(() => (board.includes(0)==false&&Owin==false&&Xwin==false), [board]);
+  const draw = useMemo(() => (board.includes(0)==false&&Owin==false&&Xwin==false), [board,Owin,Xwin]);
 
   // function move(index:number){
 
@@ -31,7 +31,7 @@ export default function Home() {
     if (player == -1) {
       move(index);
     }
-  }, [board, player, move, empty]);
+  }, [player, move]);
 
 
   useEffect(() => {
