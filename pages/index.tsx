@@ -38,7 +38,7 @@ export default function Home() {
     let timeout: any;
     if (player === 1) {
       timeout = setTimeout(() => {
-        move(minimax(board, 4, 1, true));
+        move(minimax(board, 9, 1, true));
       }, 150);
     }
 
@@ -63,7 +63,7 @@ export default function Home() {
     }</div>
 
 
-    {empty&&<p className={styles.p}>Click anywhere on the board to begin!</p>}
+    {empty&&<p className={styles.p}>Wait a sec, it's thinking!</p>}
 
     {Xwin&&<h2>Fuck Yeah X!</h2>}
     {Owin&&<h2>Fuck Yeah O!</h2>}
