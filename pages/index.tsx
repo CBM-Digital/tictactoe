@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { ReactNode, useState, useEffect, useCallback, useMemo } from 'react'
 import styles from '../styles/Home.module.css'
+import checkwinner from './checkwinner';
+import minimax from './miniMax';
 
 export default function Home() {
   const [board, setBoard] = useState(new Array(9).fill(0));
@@ -8,7 +10,7 @@ export default function Home() {
 
   const Xwin = useMemo(() => checkwinner(board, 1), [board]);
   const Owin = useMemo(() => checkwinner(board, -1), [board]);
-  const draw = useMemo(() => (board.includes(0)==false&&Owin==false&&Xwin==false), [board]);
+  const draw = useMemo(() => (board.includes(0)==false&&Owin==false&&Xwin==false), [board,Owin,Xwin]);
 
   const move = useCallback((index: number) => {
     if(Xwin||Owin){return}
@@ -29,7 +31,7 @@ export default function Home() {
     if (player == -1) {
       move(index);
     }
-  }, [board, player, move, empty]);
+  }, [player, move]);
 
 
   useEffect(() => {
@@ -80,27 +82,7 @@ function Grid(props: { children?: ReactNode, onClick?: () => void }) {
   return <div className={styles.board} onClick={props.onClick}>{props.children}</div>
 }
 
-function checkwinner(board: number[], player: number): boolean {
-  const row1 = [0, 1, 2];
-  const row2 = [3, 4, 5];
-  const row3 = [6, 7, 8];
 
-  const col1 = [0, 3, 6];
-  const col2 = [1, 4, 7];
-  const col3 = [2, 5, 8];
-
-  const diag1 = [0, 4, 8];
-  const diag2 = [2, 4, 6];
-
-  const combos = [row1, row2, row3, col1, col2, col3, diag1, diag2];
-
-  const iswin = (combo: number[]): boolean => {
-    return board[combo[0]] + board[combo[1]] + board[combo[2]] === 3 * player
-  }
-
-  const winner = combos.some(iswin)
-  return winner
-}
 
 //self defined max & min
 function max(a: number, b: number) {
@@ -111,59 +93,4 @@ function max(a: number, b: number) {
 function min(a: number, b: number) {
   if (a < b) { return a }
   else { return b }
-}
-
-function minimax(board: number[], depth: number, player: number, toplayer: boolean): number {
-  let move: number = 0;
-  let hypoboard = [...board]
-  console.log("board", board)
-  console.log("player", player)
-  console.log("depth", depth)
-  if (checkwinner(board, player * -1)) {
-    console.log("Win", player * -1)
-    return player * -1
-  }
-  else if (depth < 0 && checkwinner(board, player * -1) == false) { return 0 }
-
-  if (player == 1) {
-    console.log("player 1")
-    let maxGain = -Infinity
-    console.log(maxGain)
-    for (let i = 0; i <= 8; i++) {
-      if (board[i] == 0) {
-        hypoboard[i] = player
-        let gain = minimax(hypoboard, depth - 1, -1, false)
-        hypoboard[i] = 0
-        if (gain >= maxGain) {
-          move = i
-        }
-        maxGain = max(maxGain, gain)
-      }
-    }
-    console.log("maxgain", maxGain)
-    console.log("move", move)
-    if (toplayer == true) { return move }
-    return (maxGain * 10) + depth
-
-  }
-
-  if (player == -1) {
-    console.log("player -1")
-    let minGain = Infinity
-    console.log(minGain)
-    for (let i = 0; i <= 8; i++) {
-      if (board[i] == 0) {
-        hypoboard[i] = player
-        let gain = minimax(hypoboard, depth - 1, 1, false)
-        hypoboard[i] = 0
-        if (gain <= minGain) { move = i }
-        minGain = min(minGain, gain)
-      }
-    }
-    console.log("mingain", minGain)
-    if (toplayer == true) { return move }
-    return (minGain * 10) - depth
-  }
-
-  return move;
 }
