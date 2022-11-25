@@ -1,3 +1,5 @@
+'use client';
+
 import Head from 'next/head'
 import { ReactNode, useState, useEffect, useCallback, useMemo } from 'react'
 import styles from '../styles/Home.module.css'
