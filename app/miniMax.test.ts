@@ -33,8 +33,9 @@ const finalcases:[number[],number,number,boolean,number][] = [
   //final move ready
     [[-1,0,-1,0,-1,1,1,0,1],9,1,true,7],
     [[-1,0,0,0,1,-1,1,-1,1],9,1,true,2],
-    [[0,0,-1,0,1,-1,1,-1,1],9,1,true,2],
+    [[0,0,-1,0,1,-1,1,-1,1],9,1,true,0],
     [[0,0,-1,0,1,-1,1,-1,1],1,1,false,2],
+    [[0,0,0,0,0,0,0,0,0],9,1,true,2],
     ];
 
 describe("choosing the final move", () => {

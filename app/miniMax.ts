@@ -17,7 +17,7 @@ function minimax(board: number[], depth: number, player: number, toplayer: boole
           hypoboard[i] = player
           let gain = minimax(hypoboard, depth - 1, -1, false)
           hypoboard[i] = 0
-          if (gain >= maxGain) {
+          if (gain > maxGain) {
             move = i
           }
           maxGain = Math.max(maxGain, gain)
@@ -38,7 +38,7 @@ function minimax(board: number[], depth: number, player: number, toplayer: boole
           hypoboard[i] = player
           let gain = minimax(hypoboard, depth - 1, 1, false)
           hypoboard[i] = 0
-          if (gain <= minGain) { move = i }
+          if (gain < minGain) { move = i }
           minGain = Math.min(minGain, gain)
         }
       }
