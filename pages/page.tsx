@@ -3,8 +3,9 @@
 import Head from 'next/head'
 import { ReactNode, useState, useEffect, useCallback, useMemo } from 'react'
 import styles from '../styles/Home.module.css'
-import checkwinner from './checkwinner';
-import minimax from './miniMax';
+import checkwinner from '../app/checkwinner';
+import minimax from '../app/miniMax';
+import { redirect } from 'next/dist/server/api-utils';
 
 export default function Home() {
   const [board, setBoard] = useState(new Array(9).fill(0));

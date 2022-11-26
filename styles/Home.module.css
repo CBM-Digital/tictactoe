@@ -1,5 +1,8 @@
+.body {background-color: coral;}
+
 .container {
   padding: 0 2rem;
+  color: rgb(104, 2, 2);
 }
 
 .header {margin-left: 87px;}
@@ -113,10 +116,10 @@
 .board {
   margin: 0px;
   font-size: 50px;
-  height: 100px;
-  width: 100px;
-  background-color: #8af1ff;
-  border: 4mm ridge rgba(0, 256, 0, .6);
+  height: 85px;
+  width: 84px;
+  background-color: #f8ff34;
+  border: 2mm ridge rgba(90, 30, 30, 0.6);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -129,7 +132,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: 12px;
+  margin-left: 10px;
 }
 
 @media (max-width: 600px) {
