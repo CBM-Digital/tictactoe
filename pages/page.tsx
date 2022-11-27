@@ -29,6 +29,7 @@ export default function Home() {
   }, [board, player, Xwin, Owin]);
 
   const empty = useMemo(() => board.some((value: number) => value !== 0), [board]);
+  const playerAi = useMemo(() => player == 1,[player]);
 
   const play = useCallback((index: number) => {
     if (player == -1) {
@@ -65,8 +66,7 @@ export default function Home() {
     </Grid>))
     }</div>
 
-
-    {empty&&<p className={styles.p}>Wait a sec, it&apos;s thinking!</p>}
+    {playerAi&&<p className={styles.p}>Wait a sec, it&apos;s thinking!</p>}
 
     {Xwin&&<h2>Fuck Yeah X!</h2>}
     {Owin&&<h2>Fuck Yeah O!</h2>}
